@@ -23,7 +23,7 @@ export default function CheckBoxWithText(props: any) {
           type="text"
           onChange={(e)=>(props.setTextVal(e.target.value))}
           value={props.textVal}
-          className=" h-20 overflow-y-scroll rounded-2xl border w-[85%] ml-12 mt-[-1rem] border-black text-black p-2"
+          className=" h-20 overflow-y-scroll rounded-2xl border w-[85%] ml-12 mt-[-0.5rem] border-black text-black p-2"
         />
       ) : (
         <></>

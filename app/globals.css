@@ -23,11 +23,11 @@ body {
 .styleBox
 {
   box-shadow: 0px 2px 2px blue;
+  
 }
 .selectBox
 {
   box-shadow: 0px 2px 2px green;
-  
 }
 ::-webkit-scrollbar {
   width: 0rem;

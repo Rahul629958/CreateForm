@@ -5,7 +5,7 @@ function selectBox(props: any) {
 
   return (
     <>
-      <div className="selectBox pl-[3rem] pr-8 pt-[2rem] rounded-[3rem] h-[65vh]">
+      <div className="selectBox pl-[3rem] pr-8 pt-[2rem] rounded-[3rem] h-[65vh]" >
         {props.arrayVal.map((e:any) => (
           <CheckBoxWithText
             obj={e}

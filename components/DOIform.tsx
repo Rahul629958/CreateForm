@@ -8,7 +8,7 @@ export default function DOIform(props:any)
             
            <input type="checkbox" className=" mt-3"/>
           </div>
-          <div className="col overflow-scroll h-16 ml-[-1rem] mr-[0.2rem]">
+          <div className="col overflow-scroll h-16 mr-[0.2rem]">
             <span className=" underline font-bold">Opt-In</span><br/>
            {(props.value)}
           </div>

@@ -43,7 +43,7 @@ function StyleBox(props: any) {
                 className={
                   "btn mx-1 " +
                   (Number(props.fontWeight) == 400
-                    ? "btn-success"
+                    ? "btn-info"
                     : "btn-outline-info")
                 }
                 onClick={(e) => props.setFontWeight(400)}
@@ -53,20 +53,20 @@ function StyleBox(props: any) {
               <button
                 className={
                   "btn mx-1 " +
-                  (Number(props.fontWeight) == 700
-                    ? "btn-success"
+                  (Number(props.fontWeight) == 600
+                    ? "btn-info"
                     : "btn-outline-info")
                 }
-                onClick={(e) => props.setFontWeight(700)}
+                onClick={(e) => props.setFontWeight(600)}
               >
                 Bold
               </button>
               <button
                 className={
-                  "btn mx-1 " +
+                  "btn mx-1 " +( props.fontFamily.includes("sans-serif")?
                   (Number(props.fontWeight) == 900
-                    ? "btn-success"
-                    : "btn-outline-info")
+                    ? "btn-info"
+                    : "btn-outline-info"):"disabled")
                 }
                 onClick={(e) => props.setFontWeight(900)}
               >
@@ -96,8 +96,8 @@ function StyleBox(props: any) {
               onChange={(e) => props.setFontFamily(e.target.value)}
               value={props.fontFamily}
             >
-              <option style={{ fontFamily: "serif" }}>serif</option>
               <option style={{ fontFamily: "sans-serif" }}>sans-serif</option>
+              <option style={{ fontFamily: "serif" }}>serif</option>
               <option style={{ fontFamily: "monospace" }}>monospace</option>
               <option style={{ fontFamily: "cursive" }}>cursive</option>
               <option style={{ fontFamily: "fantasy" }}>fantasy</option>

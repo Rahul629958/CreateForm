@@ -4,7 +4,7 @@ import iconPic from '../public/form_icon_main.png'
 export default function IconName()
 {
     return (
-        <div className=" ml-12 mt-8 text-[150%]">
+        <div className=" ml-12 mt-8 text-[150%] pr-1">
         <Image
           src={iconPic}
           alt="icon"

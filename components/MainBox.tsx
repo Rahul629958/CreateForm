@@ -23,7 +23,7 @@ export default function MainBox() {
 
   const [fontSize,setFontSize] = useState(1.1);
   const [fontStyle,setFontStyle] = useState("normal");
-  const [fontFamily,setFontFamily] = useState("serif");
+  const [fontFamily,setFontFamily] = useState("sans-serif");
   const [fontColor,setFontColor] = useState("#000000");
   const [fontWeight,setFontWeight] = useState(400);
     

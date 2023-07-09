@@ -2,7 +2,7 @@ function StyleBox(props: any) {
   //{fontSize:"1.1rem",color:"black",fontStyle:"normal",fontWeight:"400",fontFamily:"sans-serif"}
   return (
     <>
-      <div className="styleBox pl-[3rem] pr-8 pt-[2rem] rounded-[3rem] h-[65vh]">
+      <div className="styleBox pl-[1rem] pr-4 pt-[2rem] rounded-[1rem] h-[65vh]">
         <div className="container-fluid overflow-y-scroll">
           <div className="row my-4 rounded-lg shadow-sm pt-2 pb-2">
             {" "}
@@ -27,15 +27,27 @@ function StyleBox(props: any) {
             </div>
           </div>
           <div className="row my-4 rounded-lg shadow-sm pt-2 pb-2 ">
-            <div className="col">Choose a color </div>
+            <div className="col">Choose text color </div>
             <input
               type="color"
               className="col-6 rounded-full pt-1 pb-1 bg-white shadow-xl cursor-pointer"
               onChange={(e) => props.setFontColor(e.target.value)}
               value={props.fontColor}
             />
-            <div className="col-2"></div>
+            {/* <div className="col-2"></div> */}
           </div>
+
+          <div className="row my-4 rounded-lg shadow-sm pt-2 pb-2 ">
+            <div className="col">Choose background </div>
+            <input
+              type="color"
+              className="col-6 rounded-full pt-1 pb-1 bg-white shadow-xl cursor-pointer"
+              onChange={(e) => props.setBgColor(e.target.value)}
+              value={props.bgColor}
+            />
+            {/* <div className="col-2"></div> */}
+          </div>
+
           <div className="row my-4 rounded-lg shadow-sm pt-2 pb-2 ">
             <div className="col"> Font weight </div>
             <div className="col-8">

@@ -1,11 +1,11 @@
 import CheckBoxWithText from "./CheckBoxWithText";
-
+import Tabs from "./Tabs";
 function selectBox(props: any) {
   
 
   return (
     <>
-      <div className="selectBox pl-[3rem] pr-8 pt-[2rem] rounded-[3rem] h-[65vh]" >
+      <div className="selectBox pl-[1rem] pr-4 pt-[2rem] rounded-[1rem] h-[65vh]" >
         {props.arrayVal.map((e:any) => (
           <CheckBoxWithText
             obj={e}
@@ -25,6 +25,8 @@ function selectBox(props: any) {
             key={e.title}
           />
         ))}
+
+        {/* <Tabs /> */}
       </div>
     </>
   );

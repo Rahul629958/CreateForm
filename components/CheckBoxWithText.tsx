@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+// import Tabs from "./Tabs";
 export default function CheckBoxWithText(props: any) {
 
 
@@ -28,6 +28,11 @@ export default function CheckBoxWithText(props: any) {
       ) : (
         <></>
       )}
+     {/* <Tabs /> */}
+     
+
+
+
     </>
   );
 }

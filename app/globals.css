@@ -20,15 +20,7 @@ body {
   box-shadow: 3px 3px 5px rgb(0, 255, 234);
 }
 
-.styleBox
-{
-  box-shadow: 0px 2px 2px blue;
-  
-}
-.selectBox
-{
-  box-shadow: 0px 2px 2px green;
-}
+
 ::-webkit-scrollbar {
   width: 0rem;
   display: none;

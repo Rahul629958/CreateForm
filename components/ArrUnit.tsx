@@ -4,7 +4,7 @@ export default function ArrUnit(props: any) {
 
   return (
     <>
-      <div className="col-lg-3 col-xs-6 col-sm-6 pt-3 pb-1 block">
+      <div className="col-lg-3 col-xs-6 col-sm-6 pt-3 pb-1 block cursor-pointer">
         <div className=" rounded-2xl group  border-blue-500 bg-blue-200 hover:border-2 hover:bg-blue-500 border-solid">
          
           <img

@@ -1,9 +1,5 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-
-const prisma = new PrismaClient();
-
+import prisma from "../_base/route";
 
 
 
@@ -11,6 +7,8 @@ const prisma = new PrismaClient();
 export async function POST(req:any,res:any) {
   // Do whatever you want
   const body= await req.json();
+
+  
   const form_id=BigInt(body.form_id);
 
   async function handleDB() {
@@ -60,11 +58,6 @@ export async function POST(req:any,res:any) {
 
 
 
-  console.log(body);
+  // console.log(body);
   return NextResponse.json({ message: JSON.stringify(body) }, { status: 200 });
-}
-
-export default function()
-{
-  return "returning default";
 }

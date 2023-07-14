@@ -8,15 +8,29 @@ export default function Form(props: any) {
     color: props.fontColor,
     fontStyle: props.fontStyle,
     fontFamily: props.fontFamily,
+    backgroundColor: props.backgroundColor,
   };
-
-  
+  var makeDisable = true;
+  if (props.forFilling == true) {
+    makeDisable = false;
+  }
 
   return (
     <>
       <div className=" pr-2 pl-2 pb-2 ">
         {arr.map((e: any) => (
-          <FillForm e={e} stylesVal={styles} key={e.title} />
+          <FillForm
+            e={e}
+            stylesVal={styles}
+            key={e.title}
+            makeDisable={makeDisable}
+            setFirstName={props.setFirstName}
+            setLastName={props.setLastName}
+            setEmail={props.setEmail}
+            setPhoneNum={props.setPhoneNum}
+            setDOI={props.setDOI}
+            forFilling={props.forFilling}
+          />
         ))}
       </div>
     </>

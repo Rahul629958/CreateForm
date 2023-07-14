@@ -13,11 +13,11 @@ datasource db {
 
 model forms{
   form_id BigInt @id
-  form_data Json
+  form_data String
 }
 
 model responses{
   response_id BigInt @unique
   form_id BigInt
-  response_data Json
+  response_data String
 }

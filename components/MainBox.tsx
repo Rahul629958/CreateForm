@@ -3,58 +3,175 @@
 import { useEffect, useState } from "react";
 import Form from "./Form";
 import IconName from "./IconWithName";
-
-
+import NotFound from "./NotFound";
 import Tabs from "./Tabs";
-import Link from "next/link";
+import Loading from "./Loading";
 
 export default function MainBox(props: any) {
+  const [id,setFormID] = useState(props.id);
+  
+   const [isLoading,setLoading] = useState(props.id>0?true:false);
+  const [Link,setLink] = useState("");
+  const [correctLink,setCorrectLink] = useState(true);
+
+  const [formValues,setFormValues] = useState({
+    contents: {
+          isfirstName: false,
+          isLastName: false,
+          isEmail: false,
+          isPhone: false,
+          isDOI: false,
+          textVal: "",
+        },
+        styles: {
+          fontSize: 1.1,
+          fontStyle: "cursive",
+          fontFamily: "sans-serif",
+          fontColor: "#000000",
+          fontWeight: 700,
+          bgColor: "#ffffff",
+        },
+        form_id: id,
+  });
+
+useEffect(()=>
+{
+  if(BigInt(props.id)>0){
+    const fetchData= async () => {
+      try {
+        console.log("Here it reaahches");
+        const response = await fetch("http://localhost:3000/api/get-data", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body:id,
+        });
+  
+        if (response.ok) {
+          const responseData = await response.json();
+          const responseJSON = responseData
+          console.log("THis is responseDat0:", responseJSON); // Data received successfully
+          // setFormValues(JSON.parse(responseData));
+          setLink("http://localhost:3000/form/"+id);
+          if(BigInt(responseJSON.form_id) <0)
+          {
+            console.log("here is error of id");
+            setCorrectLink(false);
+            setLoading(false);
+          }else{
+          setFormValues(responseJSON);
+          setLoading(false);
+          }
+        } else {
+          console.error("Error:", response.statusText);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        setLoading(false);
+      }
+    };
+    fetchData();
+    }
+},[])
+ 
+
+
+
+
+
+  if(id<0)
+  {
+    setFormID(new Date().getTime());
+  }
+
+
+
+
+
+
+
+
+
+
+
   const [formContent, setFormContent] = useState([] as any);
 
-  const [isfirstName, setfirstName] = useState(props.isfirstName);
-  const [isLastName, setLastName] = useState(props.isLastName);
-  const [isEmail, setEmail] = useState(props.isEmail);
-  const [isPhone, setPhone] = useState(props.isPhone);
-  const [isDOI, setDOI] = useState(props.isDOI);
-  const [textVal, setTextVal] = useState(props.textVal);
+  const [isfirstName, setfirstName] = useState(false);
+  const [isLastName, setLastName] = useState(false);
+  const [isEmail, setEmail] = useState(false);
+  const [isPhone, setPhone] = useState(false);
+  const [isDOI, setDOI] = useState(false);
+  const [textVal, setTextVal] = useState("");
 
-  const [fontSize, setFontSize] = useState(props.fontSize);
-  const [fontStyle, setFontStyle] = useState(props.fontStyle);
-  const [fontFamily, setFontFamily] = useState(props.fontFamily);
-  const [fontColor, setFontColor] = useState(props.fontColor);
-  const [fontWeight, setFontWeight] = useState(props.fontWeight);
-  const [bgColor, setBgColor] = useState(props.bgColor);
+  const [fontSize, setFontSize] = useState(0.8);
+  const [fontStyle, setFontStyle] = useState("normal");
+  const [fontFamily, setFontFamily] = useState("sans-serif");
+  const [fontColor, setFontColor] = useState("#000000");
+  const [fontWeight, setFontWeight] = useState(400);
+  const [bgColor, setBgColor] = useState("ffffff");
+
+
+
+
+
+
+
+
+  useEffect(()=>
+  {
+  setfirstName(formValues.contents.isfirstName)
+  setLastName(formValues.contents.isLastName)
+  setEmail(formValues.contents.isEmail)
+  setPhone(formValues.contents.isPhone)
+  setDOI(formValues.contents.isDOI)
+  setTextVal(formValues.contents.textVal)
+
+  setFontSize(formValues.styles.fontSize)
+  setFontStyle(formValues.styles.fontStyle)
+  setFontFamily(formValues.styles.fontFamily)
+  setFontColor(formValues.styles.fontColor)
+  setFontWeight(formValues.styles.fontWeight)
+  setBgColor(formValues.styles.bgColor)
+    
+  },[formValues])
+
+
+
+
+
 
   const [arrObj, setArrObj] = useState([
     {
       title: "First name",
       placeholder: "Enter your first name.",
       type: "text",
-      isSelected: props.isfirstName,
+      isSelected: isfirstName,
     },
     {
       title: "Last name",
       placeholder: "Enter your last name.",
       type: "text",
-      isSelected: props.isLastName,
+      isSelected: isLastName,
     },
     {
       title: "Email",
       placeholder: "Enter your email address.",
       type: "email",
-      isSelected: props.isEmail,
+      isSelected: isEmail,
     },
     {
       title: "Phone number",
       placeholder: "Enter your phone number.",
       type: "Phone",
-      isSelected: props.isPhone,
+      isSelected: isPhone,
     },
     {
       title: "Double Opt-In",
-      textVal: props.textVal,
+      textVal: textVal,
       type: "text",
-      isSelected: props.isDOI,
+      isSelected: isDOI,
     },
   ]);
 
@@ -104,12 +221,30 @@ export default function MainBox(props: any) {
     setFormContent(tempArr);
   }, [arrObj]);
 
-  const [id, setId] = useState(props.id < 0 ? new Date().getTime() : props.id);
+ 
+  
 
-  const[formVars,setFormVars]=useState({});
+  const [formVars, setFormVars] = useState({
+    contents: {
+      isfirstName: false,
+      isLastName: false,
+      isEmail: false,
+      isPhone: false,
+      isDOI: false,
+      textVal: "",
+    },
+    styles: {
+      fontSize: 0.8,
+      fontWeight: 400,
+      fontStyle: "normal",
+      fontFamily: "sans-serif",
+      fontColor: "#000000",
+      bgColor: "#ffffff",
+    },
+    form_id: id,
+  });
 
-  useEffect(()=>
-  {
+  useEffect(() => {
     setFormVars({
       contents: {
         isfirstName: isfirstName,
@@ -127,37 +262,68 @@ export default function MainBox(props: any) {
         fontColor: fontColor,
         bgColor: bgColor,
       },
-      form_id:id
-    })
-  },[isfirstName,isLastName,isEmail,isPhone,isDOI,fontSize,fontWeight,fontStyle,fontFamily,fontColor,bgColor])
-
-async function handleClick()
-{
-  try {
-    const response = await fetch('http://localhost:3000/api/save-form', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formVars)
+      form_id: id,
     });
+  }, [
+    isfirstName,
+    isLastName,
+    isEmail,
+    isPhone,
+    isDOI,
+    fontSize,
+    fontWeight,
+    fontStyle,
+    fontFamily,
+    fontColor,
+    bgColor,
+  ]);
 
-    if (response.ok) {
-      const responseData = await response.json();
-      console.log(responseData); // Data received successfully
-    } else {
-      console.error('Error:', response.statusText);
+  async function handleClick() {
+    try {
+      const response = await fetch("http://localhost:3000/api/save-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formVars),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData); 
+        // Data received successfully
+
+        setLink("http://localhost:3000/form/"+id);
+        alert("Saved successfully.");
+      } else {
+        console.error("Error:", response.statusText);
+        alert("Error"+response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
-  } catch (error) {
-    console.error('Error:', error);
   }
-}
-    
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
+<>
+    {
+      correctLink?
     <>
+    
       <div className="container">
         <div className="row">
           <div className="col-lg-5 col-md-4 col-sm-12">
@@ -165,25 +331,21 @@ async function handleClick()
           </div>
           <div className="col h-28 pt-8">
             <div className=" shadow-md rounded-full h-12 p-1 row">
-              <div className="col-md-3"></div>
+              <div className="col-md-1"></div>
               <div className="col-md-3">
-                {/* <Link
-                  // href={{
-                  //   pathname: "/edit-form/" + id,
-                  //   query: JSON.stringify(formVars),
-                  // }}
-                  href={'/edit-form/'+id}
-                > */}
-                  <button className="btn btn-outline-success" onClick={(e)=>(handleClick())}>
-                    Save/Update
-                  </button>
-                {/* </Link> */}
+                <button
+                  className="btn btn-outline-success"
+                  onClick={(e) => handleClick()}
+                >
+                  Save/Update
+                </button>
+              </div>
+              
+              <div className="col pl-4">
+            
+              <a href={Link} target="_blank">{Link}</a>
               </div>
               <div className="col-md-1"></div>
-              <button className="btn btn-outline-primary col-md-3">
-                Copy Link
-              </button>
-              <div className="col"></div>
             </div>
           </div>
         </div>
@@ -219,7 +381,7 @@ async function handleClick()
             <div
               className="container formSec col-sm-12 col-md-8 col-lg-6 rounded-2xl h-[64vh] pt-8 pl-2 pr-2 overflow-y-scroll overflow-x-scroll"
               style={{ background: bgColor }}
-            >
+            >{ isLoading?<Loading height={200}/>:
               <Form
                 formContent={formContent}
                 fontSize={fontSize}
@@ -227,11 +389,17 @@ async function handleClick()
                 fontColor={fontColor}
                 fontStyle={fontStyle}
                 fontFamily={fontFamily}
+                forFilling={false}
               />
+            }
             </div>
           </div>
         </div>
       </div>
     </>
+    :
+    <NotFound />
+}
+</>
   );
 }

@@ -40,7 +40,7 @@ useEffect(()=>
     const fetchData= async () => {
       try {
         console.log("Here it reaahches");
-        const response = await fetch("http://localhost:3000/api/get-data", {
+        const response = await fetch(process.env.GET_DAT, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -53,7 +53,7 @@ useEffect(()=>
           const responseJSON = responseData
           console.log("THis is responseDat0:", responseJSON); // Data received successfully
           // setFormValues(JSON.parse(responseData));
-          setLink("http://localhost:3000/form/"+id);
+          setLink("https://create-form-inky.vercel.app/form/"+id);
           if(BigInt(responseJSON.form_id) <0)
           {
             console.log("here is error of id");
@@ -280,7 +280,7 @@ useEffect(()=>
 
   async function handleClick() {
     try {
-      const response = await fetch("http://localhost:3000/api/save-form", {
+      const response = await fetch(process.env.SAVE_FORM, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -293,7 +293,7 @@ useEffect(()=>
         console.log(responseData); 
         // Data received successfully
 
-        setLink("http://localhost:3000/form/"+id);
+        setLink("https://create-form-inky.vercel.app/form/"+id);
         alert("Saved successfully.");
       } else {
         console.error("Error:", response.statusText);

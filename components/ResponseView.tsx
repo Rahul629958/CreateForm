@@ -19,7 +19,7 @@ export default function(props:any)
 
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/get-response", {
+        const response = await fetch(process.env.GET_RESPONSE, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

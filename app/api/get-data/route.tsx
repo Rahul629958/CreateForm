@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '../_base/route';
+import prisma from '../../../components/prisma';
 
 
 

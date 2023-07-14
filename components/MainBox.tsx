@@ -40,7 +40,7 @@ useEffect(()=>
     const fetchData= async () => {
       try {
         console.log("Here it reaahches");
-        const response = await fetch(process.env.GET_DAT, {
+        const response = await fetch(process.env.GET_DATA!, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -280,7 +280,7 @@ useEffect(()=>
 
   async function handleClick() {
     try {
-      const response = await fetch(process.env.SAVE_FORM, {
+      const response = await fetch(process.env.SAVE_FORM!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

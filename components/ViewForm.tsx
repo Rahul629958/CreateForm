@@ -38,7 +38,7 @@ export default function (props: any) {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(process.env.GET_DATA, {
+        const response = await fetch(process.env.GET_DATA!, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -140,7 +140,7 @@ export default function (props: any) {
 
   const handleClick = async () => {
     try {
-      const response = await fetch(process.env.POST_RESPONSE, {
+      const response = await fetch(process.env.POST_RESPONSE!, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

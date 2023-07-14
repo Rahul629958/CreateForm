@@ -13,7 +13,7 @@ export default function Homepage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(process.env.GET_FORM_ID, {
+        const response = await fetch(process.env.GET_FORM_ID!, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

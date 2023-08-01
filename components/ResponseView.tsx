@@ -16,10 +16,10 @@ export default function(props:any)
 
   useEffect(()=>
   {
-
+ 
     const fetchData = async () => {
       try {
-        const response = await fetch(process.env.GET_RESPONSE!, {
+        const response = await fetch("http://localhost:3000/api/get-response", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -32,6 +32,20 @@ export default function(props:any)
           const responseJSON = responseData;
           console.log("THis is responseDat0:", responseJSON); // Data received successfully
           // setFormValues(JSON.parse(responseData));
+          responseJSON.arr.sort((a:any, b:any) => {
+            let fa = a.response_id,
+                fb = b.response_id;
+        
+            if (fa < fb) {
+                return 1;
+            }
+            if (fa > fb) {
+                return -1;
+            }
+            return 0;
+        });
+
+
           setArr(responseJSON.arr);
           // console.log("THi sis final arr: ",arr);
           setLoading(false);
@@ -63,14 +77,15 @@ export default function(props:any)
             <div className="row">
             <div className="col-md-1"></div>
             <div className="col"> 
-          <div className="row">
-            <div className="col font-bold text-2xl">
+          <div className="row font-semi-bold text-2xl bg-green-600 text-white rounded-md pt-2 pb-2">
+            <div className="col ">
            Form Id: {id}
            </div>
+           <div className="col-md-4"> Response Count: {arr.length}</div>
           </div>
 
        
-          {isLoading?<Loading height={500}/>: arr.length>0?
+          {isLoading?<Loading height={300}/>: arr.length>0?
             arr.map((e:any)=>
             (
              <ResponseUtil data={e} key={e.response_id}/>

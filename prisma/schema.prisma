@@ -13,6 +13,7 @@ datasource db {
 
 model forms{
   form_id BigInt @id
+  userid String @default("")
   form_data String
 }
 

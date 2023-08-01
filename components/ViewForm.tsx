@@ -11,23 +11,26 @@ export default function (props: any) {
   const [isLoading,setLoading] = useState(true);
   const [correctLink, setLinkCorrect] = useState(true);
   const [formValues,setFormValues] = useState({
-    contents: {
-          isfirstName: false,
-          isLastName: false,
-          isEmail: false,
-          isPhone: false,
-          isDOI: false,
-          textVal: "",
-        },
-        styles: {
-          fontSize: 1.1,
-          fontStyle: "cursive",
-          fontFamily: "sans-serif",
-          fontColor: "#000000",
-          fontWeight: 700,
-          bgColor: "#ffffff",
-        },
-        form_id: "",
+    contents: 
+    {
+      title1: "" , description1:"" ,isField1:false,//title: label, description: placeholder, isField: weather selected
+      title2: "" , description2:"" ,isField2:false,
+      title3: "", description3:"",isField3:false,
+      title4: "", description4:"",isField4:false,
+      title5: ""  , description:"" ,isField5:false
+    },
+
+    styles: 
+    {
+      fontSize: 0.8,
+      fontStyle: "normal",
+      fontFamily: "sans-serif",
+      fontColor: "#000000",
+      fontWeight: 400,
+      bgColor: "#ffffff",
+    },
+
+    form_id: form_id,
   });
 
  
@@ -38,7 +41,7 @@ export default function (props: any) {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(process.env.GET_DATA!, {
+        const response = await fetch("http://localhost:3000/api/get-data", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -78,80 +81,59 @@ export default function (props: any) {
 
 
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [isDOI, setDOI] = useState("false");
-  const [responseVal, setResponseVal] = useState({});
+  const [field1, setValueField1] = useState("");
+  const [field2, setValueField2] = useState("");
+  const [field3, setValueField3] = useState("");
+  const [field4, setValueField4] = useState("");
+  const [field5, setValueField5] = useState(false);
+
+
+  const [responseValue,setResponseValue] = useState({
+     isField1:formValues.contents.isField1,  title1: formValues.contents.title1,value1: field1,
+     isField2:formValues.contents.isField2,  title2: formValues.contents.title2,value2: field2,
+     isField3:formValues.contents.isField3,  title3: formValues.contents.title3,value3: field3,
+     isField4:formValues.contents.isField4,  title4: formValues.contents.title4,value4: field4,
+     isField5:formValues.contents.isField5,  title5: formValues.contents.title5,value5: field5,
+     response_id:new Date().getTime(),
+     form_id:form_id
+  })
 
   const [isSubmitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    setResponseVal({
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phoneNum: phoneNum,
-      isDOI: isDOI,
-      form_id: form_id,
+    setResponseValue({
+     isField1:formValues.contents.isField1,  title1: formValues.contents.title1,value1: field1,
+     isField2:formValues.contents.isField2,  title2: formValues.contents.title2,value2: field2,
+     isField3:formValues.contents.isField3,  title3: formValues.contents.title3,value3: field3,
+     isField4:formValues.contents.isField4,  title4: formValues.contents.title4,value4: field4,
+     isField5:formValues.contents.isField5,  title5: formValues.contents.title5,value5: field5,
+     response_id:new Date().getTime(),
+     form_id:form_id
     });
-  }, [firstName, lastName, email, phoneNum, isDOI]);
+  }, [field1,field2,field3,field4,field5]);
 
-  const arrObj = [
-    {
-      title: "First name",
-      placeholder: "Enter your first name.",
-      type: "text",
-      isSelected: formValues.contents.isfirstName,
-    },
-    {
-      title: "Last name",
-      placeholder: "Enter your last name.",
-      type: "text",
-      isSelected: formValues.contents.isLastName,
-    },
-    {
-      title: "Email",
-      placeholder: "Enter your email address.",
-      type: "email",
-      isSelected: formValues.contents.isEmail,
-    },
-    {
-      title: "Phone number",
-      placeholder: "Enter your phone number.",
-      type: "Phone",
-      isSelected: formValues.contents.isPhone,
-    },
-    {
-      title: "Double Opt-In",
-      textVal: formValues.contents.textVal,
-      type: "text",
-      isSelected: formValues.contents.isDOI,
-    },
-  ];
+  
 
-  var tempArr = [];
-  for (var i = 0; i < 5; i++) {
-    if (arrObj[i].isSelected) {
-      tempArr.push(arrObj[i]);
-    }
-  }
 
   const handleClick = async () => {
     try {
-      const response = await fetch(process.env.POST_RESPONSE!, {
+      const response = await fetch("http://localhost:3000/api/post-response", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(responseVal),
+        body: JSON.stringify(responseValue),
       });
 
       if (response.ok) {
         const responseData = await response.json();
         console.log("THis is responseDat:", responseData); // Data received successfully
         // setFormValues(JSON.parse(responseData));
+        setValueField1("");
+        setValueField2("");
+        setValueField3("");
+        setValueField4("");
+        setValueField5(false);
         setSubmitted(true);
       } else {
         console.error("Error:", response.statusText);
@@ -202,19 +184,14 @@ export default function (props: any) {
               <hr />
               <br />
               <Form
-                formContent={tempArr}
-                fontSize={formValues.styles.fontSize}
-                fontWeight={formValues.styles.fontWeight}
-                fontColor={formValues.styles.fontColor}
-                fontStyle={formValues.styles.fontStyle}
-                fontFamily={formValues.styles.fontFamily}
-                backgroundColor={formValues.styles.bgColor}
-                setFirstName={setFirstName}
-                setLastName={setLastName}
-                setEmail={setEmail}
-                setPhoneNum={setPhoneNum}
-                setDOI={setDOI}
+                formValues={formValues}
                 forFilling={true}
+                setField1={setValueField1}
+                setField2={setValueField2}
+                setField3={setValueField3}
+                setField4={setValueField4}
+                setField5={setValueField5}
+                field5={field5}
               />
               <div className=" text-right mr-4">
                 <button className="btn btn-info" onClick={(e) => handleClick()}>

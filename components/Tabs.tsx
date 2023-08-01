@@ -70,12 +70,32 @@ const Tabs = (props: any) => {
           <span className="text-sm text-gray-900 dark:text-gray-900">
             {
               {
-                tab1: <SelectBox
-                arrayVal={props.arrayVal} textVal={props.textVal} setfirstName={props.setfirstName} setLastName={props.setLastName} 
-                setEmail={props.setEmail} setDOI={props.setDOI} setTextVal={props.setTextVal} setPhone={props.setPhone}
+                tab1: 
+                <SelectBox
+                 formValues={props.formValues}
+
+                 setTitle1={props.setTitle1}
+                 setTitle2={props.setTitle2}
+                 setTitle3={props.setTitle3}
+                 setTitle4={props.setTitle4}
+                 setTitle5={props.setTitle5}
+
+                 setDescription1={props.setDescription1}
+                 setDescription2={props.setDescription2}
+                 setDescription3={props.setDescription3}
+                 setDescription4={props.setDescription4}
+                 setDescription5={props.setDescription5}
+
+                 setField1={props.setField1}
+                 setField2={props.setField2}
+                 setField3={props.setField3}
+                 setField4={props.setField4}
+                 setField5={props.setField5}
                 />,
-                tab2: <StyleBox 
-                fontSize={props.fontSize} fontWeight={props.fontWeight} fontColor={props.fontColor} fontStyle={props.fontStyle} fontFamily={props.fontFamily} bgColor={props.bgColor}
+
+                tab2: 
+                <StyleBox 
+                fontSize={props.formValues.styles.fontSize} fontWeight={props.formValues.styles.fontWeight} fontColor={props.formValues.styles.fontColor} fontStyle={props.formValues.styles.fontStyle} fontFamily={props.formValues.styles.fontFamily} bgColor={props.formValues.styles.bgColor}
                 setFontSize={props.setFontSize} setFontWeight={props.setFontWeight} setFontColor={props.setFontColor} setFontStyle={props.setFontStyle} setFontFamily={props.setFontFamily} setBgColor={props.setBgColor}
                 /> ,
               }[value]

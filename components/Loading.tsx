@@ -5,8 +5,8 @@ export default function(props:any)
 { const height = props.height;
     return(
         <>
-     <div className="container ml-10 ">
-      <Image src={loadingIcon} alt="loading..." height={height} ></Image>
+     <div className="container ">
+      <Image src={loadingIcon} alt="loading..." height={height} style={{marginLeft:"40%"}} ></Image>
      </div>
         </>
     )

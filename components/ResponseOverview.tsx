@@ -7,8 +7,8 @@ export default function (props: any) {
     <>
     <Link href={"/responses/"+id} target="_blank" style={{textDecoration:"none"}}>      
     <div className="row h-12 mt-2 p-1 rounded-md bg-green-100 hover:bg-green-200 cursor-pointer">
-        <div className="col-md-2">
-          <Image src={icon_response} height={50} alt={"icon"}></Image>
+        <div className="col-md-2 col-sm-1 col-xs-1">
+          <Image src={icon_response} className="mt-1" height={30} alt={"icon"}></Image>
         </div>
         <div className="col">
           <div className="row">

@@ -1,12 +1,10 @@
 export default function DOIform(props: any) {
-  var styleVal = props.stylesVal;
 
   return (
     <>
       <div
         className="row"
         style={{
-          ...styleVal,
           borderRadius: "1rem",
           borderWidth: "1px",
           borderStyle: "solid",
@@ -20,14 +18,15 @@ export default function DOIform(props: any) {
             <input
               type="checkbox"
               className=" mt-3"
-              onChange={(e) => props.func(e.target.checked)}
+              checked={props.isChecked}
+              onChange={(e) => props.setField(e.target.checked)}
             />
           )}
         </div>
         <div className="col overflow-scroll h-16 mr-[0.2rem]">
-          <span className=" underline font-bold">Opt-In</span>
+          <span className=" underline font-extrabold">{props.title}</span>
           <br />
-          {props.value}
+          {props.description}
         </div>
       </div>
     </>

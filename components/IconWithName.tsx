@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function IconName()
 {
     return (
-        <div className=" ml-12 mt-8 text-[150%] pr-1 inline-block" >
+        <div className=" ml-12 mt-8 text-[2rem] font-semibold text-blue-900 pr-1 inline-block" >
           
         <Image
           src={iconPic}

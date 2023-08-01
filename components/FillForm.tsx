@@ -2,60 +2,30 @@ import { useEffect, useState } from "react";
 import DOIform from "./DOIform";
 
 export default function FillForm(props: any) {
-  const [valData, setValData] = useState("");
-
-  var obj = props.e;
-  const styleVal = props.stylesVal;
-  var isDOI = false;
-  if (obj.title.includes("Double Opt-In")) {
-    isDOI = true;
-  } else {
-    isDOI = false;
-  }
-
-  useEffect(() => {
-    if (props.forFilling) {
-      var temp = obj.title;
-      if (temp.includes("First")) {
-        props.setFirstName(valData);
-      } else if (temp.includes("Last")) {
-        props.setLastName(valData);
-      } else if (temp.includes("Email")) {
-        props.setEmail(valData);
-      } else if (temp.includes("Phone")) {
-        props.setPhoneNum(valData);
-      }
-    }
-  }, [valData]);
+ 
 
   return (
     <>
-      {isDOI ? (
-        <DOIform
-          value={obj.textVal}
-          stylesVal={styleVal}
-          makeDisable={props.makeDisable}
-          func={props.setDOI}
-        />
+      {props.isDOI ? (
+         <DOIform makeDisable={props.makeDisable} title={props.title} description={props.description} setField={props.setField} isChecked={props.isChecked}/>
       ) : (
         <>
-          <p style={styleVal}>{obj.title}</p>
+          <p>{props.title}</p>
           {props.makeDisable ? (
             <input
+              
               disabled
-              className="w-[80%] h-fit pt-2 pr-2 pl-2 border-b-2 border-b-green-500 mt-[-0.25rem]"
-              type="email"
-              placeholder={obj.placeholder}
-              style={styleVal}
+              className="w-[80%] h-fit pt-2 pr-2 pl-2 border-b-2 border-b-green-500 mt-[-0.25rem] "
+              type="text"
+              placeholder={props.description}
             />
           ) : (
             <input
-              className="w-[80%] h-fit pt-2 pr-2 pl-2 border-b-2 border-b-green-500 mt-[-0.25rem]"
-              type="email"
-              placeholder={obj.placeholder}
-              style={styleVal}
-              value={valData}
-              onChange={(e) => setValData(e.target.value)}
+            
+              className="w-[80%] h-fit pt-2 pr-2 pl-2 border-b-2 border-b-green-500 mt-[-0.25rem] bg-gray-300"
+              type="text"
+              placeholder={props.description}
+              onChange={(e) => props.setField(e.target.value)}
             />
           )}{" "}
           <br />
